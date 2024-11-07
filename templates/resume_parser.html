@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Parser{% endblock %}
+
+{% block Addnav %}
+<li class="nav-item active">
+  <a class="nav-link" href="/HR">HR Team</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center">Upload Resume for Parsing</h2>
+  <p class="text-center mb-4">Please upload your resume to extract key details for job matching and improvement suggestions.</p>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form action="/resume-parser" method="POST" enctype="multipart/form-data">
+        <div class="form-group mb-3">
+          <label for="resumeFile">Select Resume File (PDF format only)</label>
+          <input type="file" class="form-control" id="resumeFile" name="resume" accept=".pdf" required>
+        </div>
+        
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Upload and Parse</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  {% if ai_response %}
+  <div class="mt-5">
+      <h3 class="text-center">Resume Insights</h3>
+      <pre>{{ ai_response | safe }}</pre>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
